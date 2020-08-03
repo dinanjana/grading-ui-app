@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { Provider } from 'react-redux'
+import App from './components/App';
+import StudentStore from './store/student';
 import * as serviceWorker from './serviceWorker';
+import StudentActions from './actions/student';
+
+setTimeout(() => StudentStore.dispatch(StudentActions.loadStudentProfile('Dinanjana')), 100);
+
+window.store = () => StudentStore.getState();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <Provider store={StudentStore}>
+        <App/>
+    </Provider>,
   document.getElementById('root')
 );
 
