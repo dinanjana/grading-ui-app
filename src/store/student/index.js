@@ -22,6 +22,10 @@ const initialState = {
   },
   reviewingAssignment: {
       questions: [],
+  },
+
+  assignmentNotSubmitted: {
+      message: null,
   }
 };
 
@@ -43,6 +47,11 @@ const cleanOpenedAssignment = state => _.chain(state)
 const cleanReviewingAssignment = state => _.chain(state)
     .clone()
     .set('reviewingAssignment.questions', [])
+    .value();
+
+const cleanAssignmentNotSelected = state => _.chain(state)
+    .clone()
+    .set('assignmentNotSubmitted.message', null)
     .value();
 
 const cleanStateWhenChanging = state => cleanReviewingAssignment(cleanOpenedAssignment(cleanSelectedCourse(state)));
@@ -71,7 +80,13 @@ const reducer = (state = initialState, action) => {
                 .value();
         }
         case `${Events.LOAD_ASSIGNMENT}_PENDING`: {
-            return cleanOpenedAssignment(state);
+            return cleanAssignmentNotSelected(cleanReviewingAssignment(cleanOpenedAssignment(state)));
+        }
+        case `${Events.LOAD_ASSIGNMENT}_REJECTED`: {
+            return _.chain(state)
+                .clone()
+                .set('assignmentNotSubmitted.message', 'Assignment not submitted')
+                .value();
         }
         case Events.LOAD_ASSIGNMENT_FULFILLED: {
             return _.chain(state)

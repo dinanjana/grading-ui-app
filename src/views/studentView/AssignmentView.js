@@ -8,7 +8,8 @@ const mapStateToProps = state => ({
     score: state.openedAssignment.score,
     total: state.openedAssignment.total,
     student: state.studentProfile.student,
-    assignment: state.openedAssignment.id
+    assignment: state.openedAssignment.id,
+    assignmentNotSubmitted: state.assignmentNotSubmitted.message
 });
 
 const mapDispatchToProps = dispatch => ({

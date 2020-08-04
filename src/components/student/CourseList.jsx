@@ -8,7 +8,7 @@ const CourseList = ({ courses, loadCourseProfile }) => {
     return (
         <Accordion>
             {
-                courses.map((course, i) => (
+                courses.map((course) => (
                     <Card>
                         <Card.Header>
                             <Accordion.Toggle as={Button} variant="link" eventKey={course} onClick={() => loadCourseProfile(course)}>
