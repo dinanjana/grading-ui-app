@@ -10,12 +10,12 @@ const AssignmentReview = ({ questions }) => {
     return(
         <>
             {
-                questions.map((question) => (
+                questions.map((question, i) => (
                     <>
                         <Button variant="warning" onClick={handleShow}>
                             {question.question}
                         </Button>
-                        <QuestionReview show={show} handleClose={handleClose} question={question}/>
+                        <QuestionReview show={show} handleClose={handleClose} question={question} key={question.question}/>
                     </>
                 ))
             }
